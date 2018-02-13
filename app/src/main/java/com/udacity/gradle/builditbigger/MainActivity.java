@@ -103,16 +103,8 @@ public class MainActivity extends AppCompatActivity {
                 myApiService = builder.build();
             }
 
-    //        Context context = params[0].first;
-    //        String name = params[0].second;
-
             return String.valueOf(myApiService.getClass().getName().equals(JokeSource.getJoke()));
         }
 
-        @Override
-        protected void onPostExecute(String result) {
-    //        Toast.makeText(context, result, Toast.LENGTH_LONG).show();
-
-        }
     }
 }
