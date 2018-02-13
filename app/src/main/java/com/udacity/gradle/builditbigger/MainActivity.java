@@ -4,6 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
+import android.support.test.espresso.IdlingResource;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Pair;
 import android.view.Menu;
@@ -17,6 +21,7 @@ import com.google.api.client.googleapis.services.GoogleClientRequestInitializer;
 import com.hendercine.javajoker.JokeSource;
 import com.hendercine.jokerdroid.JokeActivity;
 import com.udacity.gradle.builditbigger.backend.myApi.MyApi;
+import com.udacity.gradle.builditbigger.utils.SimpleIdlingResource;
 
 import java.io.IOException;
 
@@ -58,6 +63,19 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
 }
 
 public class MainActivity extends AppCompatActivity {
+
+    @Nullable
+    private SimpleIdlingResource mIdlingResource;
+
+    @VisibleForTesting
+    @NonNull
+    public IdlingResource getIdlingResource() {
+        if (mIdlingResource == null) {
+            long waitingTime = 5000;
+            mIdlingResource = new SimpleIdlingResource(waitingTime);
+        }
+        return mIdlingResource;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
