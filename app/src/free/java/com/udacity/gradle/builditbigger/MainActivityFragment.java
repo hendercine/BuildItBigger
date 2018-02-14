@@ -55,7 +55,6 @@ public class MainActivityFragment extends Fragment {
         mInterstitialAd.setAdListener(new AdListener() {
                                           @Override
                                           public void onAdClosed() {
-                                              mSpinner.setVisibility(View.VISIBLE);
                                               tellJoke();
                                           }
                                       }
@@ -66,10 +65,11 @@ public class MainActivityFragment extends Fragment {
             public void onClick(View v) {
                 mSpinner.setVisibility(View.VISIBLE);
                 if (mInterstitialAd.isLoaded()) {
-                    mSpinner.setVisibility(View.GONE);
                     mInterstitialAd.show();
+                    mSpinner.setVisibility(View.GONE);
                 } else {
                     Timber.d("The interstitial wasn't loaded yet.");
+                    tellJoke();
                 }
             }
         });
@@ -77,10 +77,17 @@ public class MainActivityFragment extends Fragment {
         return root;
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        mSpinner.setVisibility(View.GONE);
+    }
+
     public void tellJoke() {
         Intent intent = new Intent(getContext(), JokeActivity.class);
         String joke = JokeSource.getJoke();
         intent.putExtra(JokeActivity.JOKE_KEY, joke);
+        mSpinner.setVisibility(View.VISIBLE);
         startActivity(intent);
     }
 }
