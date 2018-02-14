@@ -42,7 +42,6 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.jakewharton.timber:timber:4.6.1'
-    implementation project(path: ':JavaJoker')
     implementation project(path: ':jokerdroid')
     implementation 'com.google.http-client:google-http-client-android:1.23.0'
     implementation 'com.google.api-client:google-api-client:1.23.0'
