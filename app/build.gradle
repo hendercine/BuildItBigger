@@ -40,16 +40,17 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.jakewharton.timber:timber:4.6.1'
+    implementation project(path: ':JavaJoker')
+    implementation project(path: ':jokerdroid')
+    implementation 'com.google.http-client:google-http-client-android:1.23.0'
+    implementation 'com.google.api-client:google-api-client:1.23.0'
+    implementation 'com.google.android.gms:play-services-ads:11.8.0'
+
+    implementation 'com.android.support.test.espresso:espresso-idling-resource:3.0.1'
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     androidTestImplementation 'com.android.support.test.espresso:espresso-idling-resource:3.0.1'
-    implementation 'com.android.support.test.espresso:espresso-idling-resource:3.0.1'
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-    implementation 'com.google.android.gms:play-services-ads:11.8.0'
-    implementation 'com.jakewharton.timber:timber:4.6.1'
-    implementation project(path: ':JavaJoker')
-    implementation project(path: ':jokerdroid')
-    compile 'com.google.http-client:google-http-client-android:1.23.0'
-    compile 'com.google.api-client:google-api-client:1.23.0'
 }

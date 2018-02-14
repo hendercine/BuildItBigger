@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -24,6 +25,8 @@ import timber.log.Timber;
 public class MainActivityFragment extends Fragment {
 
     Button mTellJokeBtn;
+    private ProgressBar mSpinner;
+
     public MainActivityFragment() {
     }
 
@@ -37,6 +40,9 @@ public class MainActivityFragment extends Fragment {
         mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
 
         mTellJokeBtn = root.findViewById(R.id.tell_joke_btn);
+        mSpinner = root.findViewById(R.id.progress_bar);
+        mSpinner.setVisibility(View.GONE);
+
         // Create an ad request. Check logcat output for the hashed device ID to
         // get test ads on a physical device. e.g.
         // "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
@@ -49,6 +55,7 @@ public class MainActivityFragment extends Fragment {
         mInterstitialAd.setAdListener(new AdListener() {
                                           @Override
                                           public void onAdClosed() {
+                                              mSpinner.setVisibility(View.VISIBLE);
                                               tellJoke();
                                           }
                                       }
@@ -57,7 +64,9 @@ public class MainActivityFragment extends Fragment {
         mTellJokeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mSpinner.setVisibility(View.VISIBLE);
                 if (mInterstitialAd.isLoaded()) {
+                    mSpinner.setVisibility(View.GONE);
                     mInterstitialAd.show();
                 } else {
                     Timber.d("The interstitial wasn't loaded yet.");

@@ -11,6 +11,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Nullable
     private SimpleIdlingResource mIdlingResource;
+    private ProgressBar mSpinner;
 
     @VisibleForTesting
     @NonNull
@@ -42,9 +45,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mSpinner = findViewById(R.id.progress_bar);
         new EndpointsAsyncTask();
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        mSpinner.setVisibility(View.GONE);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -67,13 +76,6 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-//    public void tellJoke(View view) {
-//        Intent intent = new Intent(this, JokeActivity.class);
-//        String joke = JokeSource.getJoke();
-//        intent.putExtra(JokeActivity.JOKE_KEY, joke);
-//        startActivity(intent);
-//    }
 
     static class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
         private static MyApi myApiService = null;

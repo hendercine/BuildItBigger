@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
 import com.hendercine.javajoker.JokeSource;
 import com.hendercine.jokerdroid.JokeActivity;
@@ -18,6 +19,7 @@ import com.hendercine.jokerdroid.JokeActivity;
 public class MainActivityFragment extends Fragment {
 
     Button mTellJokeBtn;
+    private ProgressBar mSpinner;
 
     public MainActivityFragment() {
     }
@@ -28,6 +30,9 @@ public class MainActivityFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_main, container, false);
 
         mTellJokeBtn = root.findViewById(R.id.tell_joke_btn);
+        mSpinner = root.findViewById(R.id.progress_bar);
+        mSpinner.setVisibility(View.GONE)
+        ;
         mTellJokeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -38,10 +43,17 @@ public class MainActivityFragment extends Fragment {
         return root;
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        mSpinner.setVisibility(View.GONE);
+    }
+
     public void tellJoke() {
         Intent intent = new Intent(getContext(), JokeActivity.class);
         String joke = JokeSource.getJoke();
         intent.putExtra(JokeActivity.JOKE_KEY, joke);
+        mSpinner.setVisibility(View.VISIBLE);
         startActivity(intent);
     }
 }
