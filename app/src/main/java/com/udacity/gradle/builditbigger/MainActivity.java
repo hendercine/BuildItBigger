@@ -1,7 +1,6 @@
 package com.udacity.gradle.builditbigger;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,14 +11,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.google.api.client.googleapis.services.AbstractGoogleClientRequest;
 import com.google.api.client.googleapis.services.GoogleClientRequestInitializer;
 import com.hendercine.javajoker.JokeSource;
-import com.hendercine.jokerdroid.JokeActivity;
 import com.udacity.gradle.builditbigger.backend.myApi.MyApi;
 import com.udacity.gradle.builditbigger.utils.SimpleIdlingResource;
 
@@ -71,13 +68,12 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void tellJoke(View view) {
-//        Toast.makeText(this, JokeSource.getJoke(), Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this, JokeActivity.class);
-        String joke = JokeSource.getJoke();
-        intent.putExtra(JokeActivity.JOKE_KEY, joke);
-        startActivity(intent);
-    }
+//    public void tellJoke(View view) {
+//        Intent intent = new Intent(this, JokeActivity.class);
+//        String joke = JokeSource.getJoke();
+//        intent.putExtra(JokeActivity.JOKE_KEY, joke);
+//        startActivity(intent);
+//    }
 
     static class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
         private static MyApi myApiService = null;
