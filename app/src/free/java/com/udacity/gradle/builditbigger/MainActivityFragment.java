@@ -1,6 +1,5 @@
 package com.udacity.gradle.builditbigger;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,14 +8,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
 
-import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
-import com.hendercine.javajoker.JokeSource;
-import com.hendercine.jokerdroid.JokeActivity;
-
-import timber.log.Timber;
 
 
 /**
@@ -52,42 +46,44 @@ public class MainActivityFragment extends Fragment {
         mAdView.loadAd(adRequest);
         mInterstitialAd.loadAd(adRequest);
 
-        mInterstitialAd.setAdListener(new AdListener() {
-                                          @Override
-                                          public void onAdClosed() {
-                                              tellJoke();
-                                          }
-                                      }
-        );
-
-        mTellJokeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mSpinner.setVisibility(View.VISIBLE);
-                if (mInterstitialAd.isLoaded()) {
-                    mInterstitialAd.show();
-                    mSpinner.setVisibility(View.GONE);
-                } else {
-                    Timber.d("The interstitial wasn't loaded yet.");
-                    tellJoke();
-                }
-            }
-        });
+//        mInterstitialAd.setAdListener(new AdListener() {
+//                                          @Override
+//                                          public void onAdClosed() {
+//                                              tellJoke();
+//                                          }
+//                                      }
+//        );
+//
+//        mTellJokeBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                mSpinner.setVisibility(View.VISIBLE);
+//                if (mInterstitialAd.isLoaded()) {
+//                    mInterstitialAd.show();
+//                    mSpinner.setVisibility(View.GONE);
+//                } else {
+//                    Timber.d("The interstitial wasn't loaded yet.");
+//                    tellJoke();
+//                }
+//            }
+//        });
 
         return root;
     }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        mSpinner.setVisibility(View.GONE);
-    }
-
-    public void tellJoke() {
-        Intent intent = new Intent(getContext(), JokeActivity.class);
-        String joke = JokeSource.getJoke();
-        intent.putExtra(JokeActivity.JOKE_KEY, joke);
-        mSpinner.setVisibility(View.VISIBLE);
-        startActivity(intent);
-    }
+//
+//    @Override
+//    public void onStop() {
+//        super.onStop();
+//        mSpinner.setVisibility(View.GONE);
+//    }
+//
+//    public void tellJoke() {
+//        mSpinner.setVisibility(View.VISIBLE);
+//        MyBean myBean = new MyBean();
+//        myBean.setData(MyEndpoint.sayHi().toString());
+//        String theJoke = myBean.getData();
+//        MainActivity mainActivity = new MainActivity();
+//        EndpointsAsyncTask asyncTask = mainActivity.new EndpointsAsyncTask();
+//        asyncTask.execute(new Pair<Context, String>(getActivity(), theJoke));
+//    }
 }
